@@ -1,42 +1,162 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap");
+
+:root {
+  --space-dark: #050816;
+  --space-card: rgba(255, 255, 255, 0.06);
+  --space-border: rgba(255, 255, 255, 0.12);
+  --text-main: #eaeaf0;
+  --text-muted: #9aa4c7;
+  --cosmic-blue: #5eead4;
+  --cosmic-purple: #a78bfa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ===============================
+   SPACE BACKGROUND
+================================ */
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(94, 234, 212, 0.12), transparent 45%),
+    var(--space-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+/* Stars effect */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, white 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 80%, white 50%, transparent 50%),
+    radial-gradient(1px 1px at 70% 30%, white 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 60%, white 50%, transparent 50%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ===============================
+   MAIN CONTAINER
+================================ */
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   HEADER
+================================ */
+h1 {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
   text-align: center;
+  background: linear-gradient(
+    90deg,
+    var(--cosmic-purple),
+    var(--cosmic-blue)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.halo {
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  margin-bottom: 60px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ===============================
+   BIODATA CARD
+================================ */
+.biodata {
+  position: relative;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(167, 139, 250, 0.08),
+    rgba(94, 234, 212, 0.04)
+  );
+  border: 1px solid var(--space-border);
+  backdrop-filter: blur(14px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* glow ring */
+.biodata::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(167, 139, 250, 0.6),
+    rgba(94, 234, 212, 0.6),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+/* floating effect */
+.biodata:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(167, 139, 250, 0.25);
+}
+
+.biodata:hover::before {
+  opacity: 1;
+}
+
+/* ===============================
+   BIODATA TEXT
+================================ */
+.biodata p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin: 10px 0;
+  color: var(--text-muted);
+}
+
+.biodata p span {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 640px) {
+  .container {
+    padding: 40px 24px;
   }
-  to {
-    transform: rotate(360deg);
+
+  h1 {
+    font-size: 36px;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
